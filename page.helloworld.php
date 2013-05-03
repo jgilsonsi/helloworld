@@ -1,4 +1,4 @@
-<?
+<?php
 //Check if user is "logged in"
 if (!defined('FREEPBX_IS_AUTH')) { die('No direct script access allowed'); }
 //Handling form stuff....
@@ -18,8 +18,17 @@ switch ($action) {
 		needreload();
 		redirect_standard();
 	break;
-echo "<h2>"._("Hello World")."</h2>";
-
 }
 
-?>
+$variables = array(
+	'astmanconnected' => $astman->connected(),
+	'listcommands' => $astman->ListCommands(),
+	'astdatabase' => $astman->database_show(),
+	'ds' => drawselects('',1,false,false)
+);
+$html = load_view(dirname(__FILE__).'/views/main.tpl', $variables);
+echo $html;
+
+$astman->database_put('family','key','valuer');
+$out = $astman->database_get('family','key');
+echo $out;

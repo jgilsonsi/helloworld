@@ -1,29 +1,21 @@
 <?php
-/* $Id$ */
-global $db;
-global $amp_conf;
-
-if (! function_exists("out")) {
-	function out($text) {
-		echo $text."<br />";
-	}
-}
-
-if (! function_exists("outn")) {
-	function outn($text) {
-		echo $text;
-	}
-}
-
+/* FreePBX installer file
+ * This file is run when the module is installed through module admin
+ *
+ * Note: install.sql is depreciated and may not work. Its recommended to use this file instead.
+ * 
+ * If this file returns false then the module will not install
+ * EX:
+ * return false;
+ *
+ */
 $sql = "CREATE TABLE IF NOT EXISTS HelloWorld_settings (
-hwid varchar(32) NOT NULL default '',
-hwset varchar(32) NOT NULL default '',
-PRIMARY KEY (hwid)
+`key` varchar(255) NOT NULL default '',
+`value` varchar(255) NOT NULL default '',
+PRIMARY KEY (`key`)
 );";
 
-$check = $db->query($sql);
+$check = sql($sql);
 if (DB::IsError($check)) {
         die_freepbx( "Can not create `HelloWorld` table: " . $check->getMessage() .  "\n");
 }
-
-?>

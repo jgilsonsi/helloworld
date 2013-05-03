@@ -1,37 +1,54 @@
 <?php
-/* $Id$ */
-class HelloWorld_conf {
-	function get_filename() {
-			$files = array(
-				'extensions_additional.conf'
-			);
-			return $files;
-	}//get_filename()
-		//This function is called for every file defined in 'get_filename()' function above
-	function generateConf($file) {
-        global $version,$amp_conf,$astman;
-        foreach  ($this->get_filename() as $f){
-			if(!file_exists($amp_conf['ASTETCDIR'] . "/$f")) {
-				touch($amp_conf['ASTETCDIR'] . "/$f");
-			}//if
-		}//foreach
-		switch($file) {
-			case extensions_additional.conf:
-				return $this->generate_extensions_conf($version);
-                break;
-		}//switch
-	}//generateConf
-	function generate_extensions_conf($ast_version) {
-		global $ext
-		//create a dialplan
-		//www.freepbx.org/trac/wiki/ApiExtensions
-		$id = 'app-HelloWorld';
-		$dial = '*42';
-		$ext->add($id, $dial, '', new ext_answer(''));
-		$ext->add($id, $dial, '', new ext_playback('hello-world'));
-		$ext->add($id, $dial, '', new ext_macro('hangupcall'));
-		return $ext->generateConf();
-	}//generate_extensions_conf()
-}//class HelloWorld
-	
-?>
+
+/**
+ * <this raw module name>_hook_<hooked raw module name>
+ *
+ * This function allows one to hook html into many different modules' pages to display html/information
+ * In this example we have hooked into blacklist
+ *
+ * @return string The return HTML to send back
+ */
+function helloworld_hook_blacklist() {
+	$html = '';
+	$html = '<tr><td colspan="2"><h5>';
+	$html .= _("Hello World Hook");
+	$html .= '<hr></h5></td></tr>';
+	$html .= '<tr><td><a href="#" class="info">';
+	$html .= _("This is the Text for the item").'<span>'._("Popup Help Descriptions").'.</span></a>';
+	$html .= '</td><td>';
+	$html .= 'This is the item';
+	$html .= '</td></tr>';
+
+	return $html;
+}
+
+/**
+ * <this raw module name>_hookProcess_<hooked raw module name>
+ *
+ * This function allows one to process data that was saved on the hooked raw module page
+ * 
+ * @param $viewing_itemid string the id of the item being viewed
+ * @param $request array php's $_REQUEST array
+ * @return bool true successful or false if not
+ */
+function helloworld_hookProcess_blacklist($viewing_itemid, $request) {
+}
+
+function helloworld_configpageinit($pagename) {
+	helloworld_applyhooks();
+}
+
+function helloworld_applyhooks() {
+    global $currentcomponent;
+
+    // Add the 'process' function - this gets called when the page is loaded, to hook into
+    // displaying stuff on the page.
+    $currentcomponent->addguifunc('helloworld_configpageload');
+}
+
+
+function helloworld_configpageload() {
+	global $currentcomponent, $endpoint, $db;
+	$section = _('Hooker');
+	$currentcomponent->addguielem($section, new gui_drawselects('hooker_box', 50, '', 'GUI Item Name', 'Gui Item Help Text'), 9);
+}

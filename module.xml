@@ -1,5 +1,5 @@
 <module>
-	<rawname>HelloWorld</rawname>
+	<rawname>helloworld</rawname>
 	<name>Hello World</name>
 	<version>0.1.0.0</version>
 	<candisable>yes</candisable>
@@ -18,9 +18,6 @@
 		<module>core</module>
 		<version>ge2.2</version>
     </depends>
-	<type>setup</type>
-	<category>Basic</category>
-	<location>x</location>
-	<md5sum>x</md5sum>
+	<category>Settings</category>
 </module>
 
