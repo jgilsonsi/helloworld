@@ -10,6 +10,9 @@
 	<description>
 		provides a hello world example
 	</description>
+	<attention>
+		This text will be displayed prominently before the user is able to install the module. Use to display warning before installation.
+	</attention>
 	<info>http://github.com/jfinstrom/</info>
 	<menuitems>
                 <HelloWorld>Hello World</HelloWorld>
