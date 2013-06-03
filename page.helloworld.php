@@ -24,11 +24,12 @@ $variables = array(
 	'astmanconnected' => $astman->connected(),
 	'listcommands' => $astman->ListCommands(),
 	'astdatabase' => $astman->database_show(),
-	'ds' => drawselects('',1,false,false)
+	'ds' => drawselects('',1,false,false),
+	'amp_conf' => $amp_conf
 );
 $html = load_view(dirname(__FILE__).'/views/main.tpl', $variables);
 echo $html;
 
 $astman->database_put('family','key','valuer');
 $out = $astman->database_get('family','key');
-echo $out;
+//echo $out;

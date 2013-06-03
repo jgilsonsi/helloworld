@@ -15,3 +15,10 @@
 <?php echo $family?>=><?php echo $value . "\n"?>
 <?php } ?>
 </textarea>
+
+<h5>Available AMP Configuration Globals?<hr></h5>
+<textarea rows="20" cols="180">
+<?php foreach($amp_conf as $command => $description) {?>
+<?php echo $command?>=><?php echo $description . "\n"?>
+<?php } ?>
+</textarea>
