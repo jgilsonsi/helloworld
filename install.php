@@ -10,7 +10,7 @@
  *
  */
 $sql = "CREATE TABLE IF NOT EXISTS HelloWorld_settings (
-`key` varchar(255) NOT NULL default '',
+`key` varchar(191) NOT NULL default '',
 `value` varchar(255) NOT NULL default '',
 PRIMARY KEY (`key`)
 );";
